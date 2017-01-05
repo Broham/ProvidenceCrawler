@@ -5,10 +5,14 @@ import os
 import config
 
 with requests.Session() as session:
-    session.auth = (config.user, config.password)
 
+    session.auth = (config.user, config.password)
     def get_repos(since=0):
+        '''
+        Place Holder Comment
+        '''
         url = 'http://api.github.com/repositories'
+
         data = """{
           since: %s
         }""" % since
@@ -25,11 +29,17 @@ with requests.Session() as session:
 
 
     def get_repo(url):
+        '''
+        Place Holder Comment
+        '''
         response = session.get(url)
         return response.json()
 
 
     def get_read_me(url):
+        '''
+        Place Holder Comment
+        '''
         # Grabs the readme file associated with the current repository
         url += '/readme'
         response = session.get(url)
@@ -38,12 +48,29 @@ with requests.Session() as session:
 
     # todo: return array of all commits so we can examine each one 
     def get_repo_sha(url):
+        '''
+        Place Holder Comment
+        '''
         # /repos/:owner/:repo/commits
         commits = session.get(url + '/commits').json()
         return commits[0]['sha']
 
 
+    def get_all_repo_sha(url):
+        '''
+        Place Holder Comment
+        '''
+        commits = session.get(url + '/commits').json()
+        all_sha = []
+        for x in range(len(commits)):
+            all_sha[x] = commits[x]['sha']
+        return all_sha
+
+
     def get_file_content(item):
+        '''
+        Place Holder Comment
+        '''
         ignore_extensions = ['jpg']
         filename, extension = os.path.splitext(item['path'])
         if extension in ignore_extensions:
@@ -57,6 +84,9 @@ with requests.Session() as session:
 
 
     def get_repo_contents(url, sha):
+        '''
+        Place Holder Comment
+        '''
         # /repos/:owner/:repo/git/trees/:sha?recursive=1
         url += '/git/trees/%s?recursive=1' % sha
         # print 'url', url
