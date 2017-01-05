@@ -1,1 +1,2 @@
-
+user='user'
+password='password'
